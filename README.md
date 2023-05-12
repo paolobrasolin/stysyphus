@@ -29,3 +29,16 @@ interface Metadata = {
     }[];
 }
 ```
+
+## Target CLSs
+
+- [ ] `article`
+- [ ] `scrartcl`
+- [ ] `amsart`
+- [ ] `elsarticle`
+- [ ] `tac`
+- [ ] `svjour`
+- [ ] `eptcs`
+- [ ] `lipics-v2021`
+- [ ] `IEEEtran`
+- [ ] ...
