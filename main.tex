@@ -12,6 +12,9 @@ meta = {{
         { fullname = Al Gebra },
         { fullname = Theo Rem },
     },
+    abstract = {
+        This is my abstract. I do math: $\int e^x dx$. See?
+    }
 }},
 ]{stysyphus}
 
@@ -20,6 +23,12 @@ meta = {{
 \begin{document}
 
 \maketitle
+
+\begin{stysyphus}{article}
+    \begin{abstract}
+        \stysyphusGet{abstract}
+    \end{abstract}
+\end{stysyphus}
 
 \lipsum
 

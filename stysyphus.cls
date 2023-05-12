@@ -66,11 +66,18 @@
     \str_case:Nn \l_stysyphus_target_tl { #1 }
 }
 
+\NewDocumentCommand { \stysyphusGet } { m }{
+    \prop_get:NnN \l_stysyphus_meta_prop { #1 } \l_tmpa_tl
+    \tl_use:N \l_tmpa_tl
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \prop_get:NnN \l_stysyphus_meta_prop { title } \l_tmpa_tl
 \exp_args:Ne \title { \tl_use:N \l_tmpa_tl }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \prop_get:NnN \l_stysyphus_meta_prop { authors } \l_tmpa_tl
 \clist_set:NV \l_tmpa_clist \l_tmpa_tl
@@ -104,6 +111,14 @@
     %     \exp_args:Ne \author { \tl_use:N \l_tmpb_tl }
 } {}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tl_if_eq:nVTF { elsarticle } \l_stysyphus_target_tl {
+\prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+\AtBeginDocument{
+\exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
