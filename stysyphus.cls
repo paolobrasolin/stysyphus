@@ -125,7 +125,7 @@
 \AtBeginDocument{
 \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
 }
-}
+} {}
 
 % article and tac need abstracts after maketitle
 \tl_if_eq:nVTF { tac } \l_stysyphus_target_tl {
