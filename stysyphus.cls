@@ -10,6 +10,11 @@
 
 \ExplSyntaxOn
 
+%=[ Interface variants ]========================================================
+
+\cs_generate_variant:Nn \prop_set_from_keyval:Nn { NV }
+\cs_generate_variant:Nn \tl_if_eq:nnTF { nVTF }
+
 %=[ CLS options parsing ]=======================================================
 
 \keys_define:nn { stysyphus }
@@ -29,11 +34,6 @@
 
 \tl_new:N \l_stysyphus_meta_prop
 \prop_set_from_keyval:NV \l_stysyphus_meta_prop \l_stysyphus_meta_tl
-
-%=[ Interface variants ]========================================================
-
-\cs_generate_variant:Nn \prop_set_from_keyval:Nn { NV }
-\cs_generate_variant:Nn \tl_if_eq:nnTF { nVTF }
 
 %=[ Target CLS loading ]========================================================
 
