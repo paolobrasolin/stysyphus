@@ -121,6 +121,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tl_if_eq:nVTF { elsarticle } \l_stysyphus_target_tl {
+\tl_clear:N \l_tmpa_tl
 \prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
 \AtBeginDocument{
 \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
