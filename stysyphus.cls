@@ -39,24 +39,20 @@
 \tl_new:N \l_stysyphus_meta_prop
 \prop_set_from_keyval:NV \l_stysyphus_meta_prop \l_stysyphus_meta_tl
 
-
-\prop_get:NVN \l_stysyphus_options_prop \l_stysyphus_target_tl \l_tmpa_tl
-
 %\PassOptionsToClass {
 % version = last,
 %} { scrreprt }
 
-\edef\lol{
-    \noexpand\LoadClass [ \tl_use:N \l_tmpa_tl ]
-    { \tl_use:N \l_stysyphus_target_tl }
+\prop_if_in:NVTF \l_stysyphus_options_prop \l_stysyphus_target_tl
+{
+    \prop_get:NVN \l_stysyphus_options_prop \l_stysyphus_target_tl \l_tmpa_tl
+    \tl_set:Nx \l_tmpb_tl
+        { \exp_not:N \LoadClass [ \tl_use:N \l_tmpa_tl ] { \tl_use:N \l_stysyphus_target_tl } }
+    \tl_use:N \l_tmpb_tl
 }
-\lol
+{ \exp_args:NV \LoadClass \l_stysyphus_target_tl }
 
-%\AtBeginDocument{
-%   Hello, \tl_use:N \l_stysyphus_target_tl!
-%   \par
-%   Hello, \tl_use:N \l_stysyphus_option_tl!
-%}
+%%%%%%%%%%%%%%%%%%%
 
 \cs_generate_variant:Nn \tl_if_eq:nnTF { nVTF }
 \NewDocumentEnvironment { stysyphus } { m +b }
