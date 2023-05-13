@@ -98,6 +98,17 @@
     \exp_args:No \author { \seq_use:Nnnn \l_tmpa_seq { \and } { \and } { \and } }
 } {}
 
+% tac
+\tl_if_eq:nVTF { tac } \l_stysyphus_target_tl {
+    \seq_clear:N \l_tmpa_seq
+    \clist_map_inline:Nn \l_tmpa_clist {
+        \prop_set_from_keyval:Nn \l_tmpb_prop { #1 }
+        \prop_get:NnN \l_tmpb_prop { fullname } \l_tmpb_tl
+        \seq_put_right:NV \l_tmpa_seq \l_tmpb_tl
+        }
+    \exp_args:Ne \author { \seq_use:Nnnn \l_tmpa_seq { ~and~ } { ,~ } { ,~and~ } }
+} {}
+
 % lipics-v2021
 \tl_if_eq:nVTF { lipics-v2021 } \l_stysyphus_target_tl {
     % \tl_clear:N \l_tmpa_tl
@@ -115,6 +126,32 @@
 \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
 }
 }
+
+% article and tac need abstracts after maketitle
+\tl_if_eq:nVTF { tac } \l_stysyphus_target_tl {
+\prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+    \let\oldmaketitle\maketitle
+    \renewcommand{\maketitle}{
+        \oldmaketitle
+        \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+    }
+    % probably better:
+    % \cs_set_eq:NN \oldmaketitle \maketitle
+    % \cs_new_protected:Npn \maketitle {
+    %     \oldmaketitle % original definition
+    %     % Append additional code
+    % }
+} {}
+
+
+\tl_if_eq:nVTF { article } \l_stysyphus_target_tl {
+\prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+    \let\oldmaketitle\maketitle
+    \renewcommand{\maketitle}{
+        \oldmaketitle
+        \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+    }
+} {}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

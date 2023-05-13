@@ -1,4 +1,13 @@
-CLS = article elsarticle
+CLS = \
+	article \
+	elsarticle \
+	tac
+# amsart \
+# scrartcl \
+# svjour \
+# eptcs \
+# lipics-v2021 \
+# IEEEtran
 
 pdf: $(addprefix test/,$(addsuffix .pdf,$(CLS)))
 
