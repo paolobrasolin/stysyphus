@@ -65,6 +65,17 @@
     \tl_use:N \l_tmpa_tl
 }
 
+%=[ Metadata: helpers ]=========================================================
+
+\cs_new_protected:Npn \sysyphus_electric_bogaloo:nnn #1#2#3 {
+    \tl_if_eq:nVTF { #1 } \l_stysyphus_target_tl {
+        \tl_clear:N \l_tmpa_tl
+        \prop_get:NnN \l_stysyphus_meta_prop { #2 } \l_tmpa_tl
+        \cs_new_protected:Npn \__my_temp_macro:n ##1 {#3}
+        \__my_temp_macro:n { \tl_use:N \l_tmpa_tl }
+    } {}
+}
+
 %=[ Metadata: title ]===========================================================
 
 \prop_get:NnN \l_stysyphus_meta_prop { title } \l_tmpa_tl
@@ -106,31 +117,27 @@
 
 %=[ Metadata: abstract ]========================================================
 
-\tl_if_eq:nVTF { elsarticle } \l_stysyphus_target_tl {
-    \tl_clear:N \l_tmpa_tl
-    \prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+\sysyphus_electric_bogaloo:nnn { elsarticle } { abstract } {
     \AtBeginDocument{
-        \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+        \exp_args:Ne \abstract { #1 } \endabstract
     }
-} {}
+}
 
-\tl_if_eq:nVTF { tac } \l_stysyphus_target_tl {
-\prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+\sysyphus_electric_bogaloo:nnn { tac } { abstract } {
     \let\oldmaketitle\maketitle
     \renewcommand{\maketitle}{
         \oldmaketitle
-        \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+        \exp_args:Ne \abstract { #1 } \endabstract
     }
-} {}
+}
 
-\tl_if_eq:nVTF { article } \l_stysyphus_target_tl {
-\prop_get:NnN \l_stysyphus_meta_prop { abstract } \l_tmpa_tl
+\sysyphus_electric_bogaloo:nnn { article } { abstract } {
     \let\oldmaketitle\maketitle
     \renewcommand{\maketitle}{
         \oldmaketitle
-        \exp_args:Ne \abstract { \tl_use:N \l_tmpa_tl } \endabstract
+        \exp_args:Ne \abstract { #1 } \endabstract
     }
-} {}
+}
 
 %=[ TODO ]======================================================================
 
