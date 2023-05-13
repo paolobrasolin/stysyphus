@@ -13,7 +13,7 @@ pdf: $(addprefix test/,$(addsuffix .pdf,$(CLS)))
 
 tex: $(addprefix test/,$(addsuffix .tex,$(CLS)))
 
-$(addprefix test/,$(addsuffix .pdf,$(CLS))): test/%.pdf: test/%.tex
+$(addprefix test/,$(addsuffix .pdf,$(CLS))): test/%.pdf: test/%.tex stysyphus.cls
 	@latexmk -output-directory=test/ -pdf $<
 
 $(addprefix test/,$(addsuffix .tex,$(CLS))): test/%.tex: main.tex
