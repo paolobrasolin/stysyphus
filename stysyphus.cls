@@ -71,8 +71,8 @@
     \tl_if_eq:nVTF { #1 } \l_stysyphus_target_tl {
         \tl_clear:N \l_tmpa_tl
         \prop_get:NnN \l_stysyphus_meta_prop { #2 } \l_tmpa_tl
-        \cs_new_protected:Npn \__my_temp_macro:n ##1 {#3}
-        \__my_temp_macro:n { \tl_use:N \l_tmpa_tl }
+        \cs_set_protected:Npn \__my_temp_macro:n ##1 {#3}
+        \exp_args:Ne \__my_temp_macro:n { \tl_use:N \l_tmpa_tl }
     } {}
 }
 
@@ -84,36 +84,36 @@
 
 %=[ Metadata: authors ]=========================================================
 
-\prop_get:NnN \l_stysyphus_meta_prop { authors } \l_tmpa_tl
-\clist_set:NV \l_tmpa_clist \l_tmpa_tl
-
-\tl_if_eq:nVTF { elsarticle } \l_stysyphus_target_tl {
+\sysyphus_electric_bogaloo:nnn { elsarticle } { authors } {
+    \clist_set:Nn \l_tmpa_clist { #1 }
     \clist_map_inline:Nn \l_tmpa_clist {
-        \prop_set_from_keyval:Nn \l_tmpb_prop { #1 }
+        \prop_set_from_keyval:Nn \l_tmpb_prop { ##1 }
         \prop_get:NnN \l_tmpb_prop { fullname } \l_tmpb_tl
         \exp_args:Ne \author { \tl_use:N \l_tmpb_tl }
     }
-} {}
+}
 
-\tl_if_eq:nVTF { article } \l_stysyphus_target_tl {
+\sysyphus_electric_bogaloo:nnn { article } { authors } {
+    \clist_set:Nn \l_tmpa_clist { #1 }
     \seq_clear:N \l_tmpa_seq
     \clist_map_inline:Nn \l_tmpa_clist {
-        \prop_set_from_keyval:Nn \l_tmpb_prop { #1 }
+        \prop_set_from_keyval:Nn \l_tmpb_prop { ##1 }
         \prop_get:NnN \l_tmpb_prop { fullname } \l_tmpb_tl
         \seq_put_right:NV \l_tmpa_seq \l_tmpb_tl
     }
     \exp_args:No \author { \seq_use:Nnnn \l_tmpa_seq { \and } { \and } { \and } }
-} {}
+}
 
-\tl_if_eq:nVTF { tac } \l_stysyphus_target_tl {
+\sysyphus_electric_bogaloo:nnn { tac } { authors } {
+    \clist_set:Nn \l_tmpa_clist { #1 }
     \seq_clear:N \l_tmpa_seq
     \clist_map_inline:Nn \l_tmpa_clist {
-        \prop_set_from_keyval:Nn \l_tmpb_prop { #1 }
+        \prop_set_from_keyval:Nn \l_tmpb_prop { ##1 }
         \prop_get:NnN \l_tmpb_prop { fullname } \l_tmpb_tl
         \seq_put_right:NV \l_tmpa_seq \l_tmpb_tl
     }
     \exp_args:Ne \author { \seq_use:Nnnn \l_tmpa_seq { ~and~ } { ,~ } { ,~and~ } }
-} {}
+}
 
 %=[ Metadata: abstract ]========================================================
 
