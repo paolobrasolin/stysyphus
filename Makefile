@@ -1,11 +1,11 @@
 CLS = \
 	article \
 	elsarticle \
-	tac
+	tac \
+  eptcs
 # amsart \
 # scrartcl \
 # svjour \
-# eptcs \
 # lipics-v2021 \
 # IEEEtran
 

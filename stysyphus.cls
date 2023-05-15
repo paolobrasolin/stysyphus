@@ -82,7 +82,7 @@
 
 \exp_args:Ne \title { \tl_use:N \l_tmpa_tl }
 
-%=[ Metadata: authors ]=========================================================
+%=[ Metadata: authors fullnames ]===============================================
 
 \sysyphus_electric_bogaloo:nnn { elsarticle } { authors } {
     \clist_set:Nn \l_tmpa_clist { #1 }
@@ -114,6 +114,19 @@
     }
     \exp_args:Ne \author { \seq_use:Nnnn \l_tmpa_seq { ~and~ } { ,~ } { ,~and~ } }
 }
+
+\sysyphus_electric_bogaloo:nnn { eptcs } { authors } {
+    \clist_set:Nn \l_tmpa_clist { #1 }
+    \seq_clear:N \l_tmpa_seq
+    \clist_map_inline:Nn \l_tmpa_clist {
+        \prop_set_from_keyval:Nn \l_tmpb_prop { ##1 }
+        \prop_get:NnN \l_tmpb_prop { fullname } \l_tmpb_tl
+        \seq_put_right:NV \l_tmpa_seq \l_tmpb_tl
+    }
+    \exp_args:No \author { \seq_use:Nnnn \l_tmpa_seq { \and } { \and } { \and } }
+}
+
+%=[ Metadata: authors affiliation ]=============================================
 
 %=[ Metadata: abstract ]========================================================
 
